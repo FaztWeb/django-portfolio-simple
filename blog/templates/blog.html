@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h1 class="fs-2">Posts</h1>
+<h3>There are {{total_posts}} post{{total_posts|pluralize}}</h3>
+
+{% for post in posts %}
+
+<div class="py-3">
+
+  <div class="card card-body bg-black">
+    <div class="row">
+
+      <div class="col-3">
+        <img class="img-fluid" src="{{post.image.url}}" alt="{{post.title}}">
+
+      </div>
+      <div class="col-9">
+
+        <h1>{{post.title}}</h1>
+        <p>{{post.description|striptags|truncatechars:100}}</p>
+        <p>{{post.date|date:'M d Y'|upper}}</p>
+
+        <a href="{% url 'blog:post_detail' post.id %}">{{post.title}}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
